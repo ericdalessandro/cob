@@ -1,0 +1,223 @@
+#page_title {
+    font-size: 60px;
+}
+
+.add_to_cart{
+    font-family: "Bahnschrift", "Calibri", sans-serif;
+    color: black;
+    border: 1px solid black;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.cart {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+}
+
+.cart-header {
+    font-weight: bold;
+    font-size: 1.25em;
+    color: #333;
+}
+
+.cart-column {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-right: 1.5em;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.cart-row {
+    display: flex;
+    width: 100%;
+}
+
+.cart-item {
+    width: 45%;
+}
+
+.cart-price {
+    width: 20%;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cart-quantity {
+    width: 35%;
+}
+
+.cart-item-title {
+    color: #333;
+    margin-left: .5em;
+    font-size: 1.2em;
+}
+
+.cart-item-image {
+    width: 75px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.cart-quantity-input {
+    height: 34px;
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid #56CCF2;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    text-align: center;
+    font-size: 1.2em;
+    margin-right: 25px;
+}
+
+.cart-total-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: black;
+    margin-right: 20px;
+}
+
+.cart-total-price {
+    color: #333;
+    font-size: 1.1em;
+}
+
+.fish {
+    border: 2px solid white;
+    border-radius: 10%;
+    height: 175px;
+    width: 175px;
+    display: block;
+    margin: auto;
+}
+
+.form-row{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.form-col{
+    width: 50%;
+}
+
+.remove_item_btn {
+    color: white;
+    background-color: #EB5757;
+    border: none;
+    border-radius: .3em;
+    font-weight: bold;
+}
+
+.shop_item {
+    width: 20%;
+    float: left;
+    padding: 20px;
+}
+
+.shop_row {
+    display: block;
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    padding-left: 10%;
+    height: 350px;
+}
+
+.show-cart {
+    font-size: 1.2em;
+    font-family: "Bahnschrift", "Calibri", sans-serif;
+    color: black;
+    border: 1px solid black;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.show-products {
+    font-size: 1.2em;
+    font-family: "Bahnschrift", "Calibri", sans-serif;
+    color: black;
+    border: 1px solid black;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.submitSection {
+    text-align: center;
+}
+
+.wrapper {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    background-image: url(media/header_bg.jpg);
+    padding-top: 50px;
+    background-position: top;
+    background-size: cover;
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav li a {
+    text-decoration: none;
+    color: black;
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: large;
+}
+
+body {
+    background-color: rgb(166, 221, 241);
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+footer {
+    text-align: center;
+    width: 100%;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+form{
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+input{
+    width: 90%;
+    margin-bottom: 1.5em;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+label{
+    margin-bottom: 1em;
+    display: block;
+}
