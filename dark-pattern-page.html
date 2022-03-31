@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<!--
+    Dark version of Cob's Soulo Game.
+    Made by Eric D'Alessandro for CS480B HW3 Spring 2022.
+-->
+
+<html lang="en">
+    
+    <head>
+        <title>Cob's Soulo Game</title>
+        <link id="stylesheet-link" rel="stylesheet" type="text/css" href="style.css" />
+        <script src="script.js" async></script>
+    </head>
+
+    <body class="light-pattern-body">
+        <div id="isDarkPattern">Y</div>
+        <main>
+            <div class="login">
+
+                <h1>WELCOME TO COB'S SOULO GAME</h1>
+                <form class="login-form">
+                    <label for="username">Username:</label><br/>
+                    <input type="text" id="username" name="username" required/><br/>
+                    <label for="password">Password:</label><br/>
+                    <input type="password" id="password" name="password" required/>
+                    <input type="checkbox" onclick="showPassword()">Show <br/>
+                    <input type="checkbox" required checked>I agree to the terms of service. <br/>
+                    <div class="submit">
+                        <input type="button" value="Submit" onclick="hideAllExcept('landing-page')"/>
+                    </div>
+                </form>
+                
+            </div>
+
+            <div class="landing-page">
+
+                <h1>COB'S SOULO GAME</h1>
+                <div class="button-row">
+                    <ul>
+                        <button class="button-row-button" id="daily-login-button" type="button" onclick="hideAllExcept('daily-login-bonus')">Daily Login Bonus</button>
+                        <button class="button-row-button" id="store-button" type="button" onclick="hideAllExcept('store')">Store</button>
+                        <button class="button-row-button" id="recharge-button" type="button" onclick="hideAllExcept('recharge')">Recharge</button>
+                    </ul>
+                </div>
+
+                <div class="game-row">
+                    <div class="game" onclick="touchGrass(1)">
+                        <h2>Touch Grass for Points</h2>
+                        <h3 id="grassTouchedText">Grass Touched: 0</h3>
+                    </div>
+                    <div class="coins-col">
+                        <div class="coin" id="gold-coin" onclick="adjustCoinCount('gold', -1, true)">
+                            <h3 id="gold-coin-counter">0</h3>
+                        </div>
+                        <div class="coin" id="silver-coin" onclick="adjustCoinCount('silver', -1, true)">
+                            <h3 id="silver-coin-counter">0</h3>
+                        </div>
+                        <div class="coin" id="copper-coin" onclick="adjustCoinCount('copper', -1, true)">
+                            <h3 id="copper-coin-counter">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 id="dlb-title">Daily Login Progress to Dark Theme</h3>
+                <div class="dlb-counter-row">
+                    <div id="progress-bar">
+                        <div id="progress-fill"></div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="daily-login-bonus">
+                <h1>DAILY LOGIN BONUS</h1>
+                <div class="incantation"><h2 id="incantation-text"></h2></div>
+                <form class="incantation-form">
+                    <input type="checkbox" value="yes" id="read-checkbox" required checked>I agree to be one step closer to dark mode!* <br/>
+                    <div class="submit">
+                        <input class="incantation-button" type="button" value="Submit" onclick="dailyBonus(false, true)"/>
+                        <input class="incantation-button" type="button" value="Skip Midnight Check" onclick="dailyBonus(true, true)"/>
+                    </div>
+                    <h3 style="display: none" id="incantation-error-msg">.</h3>
+                    <h4 class="hide-this">*I have read this incantation and acknowledge that is the same as reading it aloud.</h4>
+                    <h4 class="hide-this">**I acknowledge that I will be billed for every Daily Login Bonus I collect.</h4>
+                    <h4 class="hide-this">***I absolve Cob's of any responsibility for my actions on this site.</h4>
+                </form>
+            </div>
+
+            <div class="store">
+                <h1>COB'S STORE</h1>
+                <div class="store-row">
+                    <div class="store-item" id="extra-grass-store-item">
+                        <h3>50k Extra Grass</h3>
+                        <h3>10 Gold Coins</h3>
+                        <input class="incantation-button" type="button" value="Buy" onclick="buyStoreItem('grass')"/>
+                    </div>
+                    <div class="store-item" id="dark-theme-shop-item">
+                        <h3>Dark Theme!</h3>
+                        <h3>Free!</h3>
+                        <input class="incantation-button" type="button" value="Toggle" onclick="buyStoreItem('dark')"/>
+                    </div>
+                </div>
+                <div class="submit">
+                    <input class="incantation-button" type="button" value="Return to Game" onclick="hideAllExcept('landing-page')"/>
+                </div>
+            </div>
+
+            <div class="recharge">
+                <h1>RECHARGE COINS</h1>
+                <h4 class="hide-this">All purchases are recurring unless stated otherwise.</h4>
+                <div class="store-row">
+                    <div class="recharge-item" id="gold-recharge">
+                        <h3>10 Gold</h3>
+                        <h3>$20</h3>
+                        <input class="incantation-button" type="button" value="Buy" onclick="buyStoreItem('gold')"/>
+                    </div>
+                    <div class="recharge-item" id="silver-recharge">
+                        <h3>10 Silver</h3>
+                        <h3>$15</h3>
+                        <input class="incantation-button" type="button" value="Buy" onclick="buyStoreItem('silver')"/>
+                    </div>
+                    <div class="recharge-item" id="copper-recharge">
+                        <h3>10 Copper</h3>
+                        <h3>$9</h3>
+                        <input class="incantation-button" type="button" value="Buy" onclick="buyStoreItem('copper')"/>
+                    </div>
+                </div>
+                <div class="submit">
+                    <input class="incantation-button" type="button" value="Return to Game" onclick="hideAllExcept('landing-page')"/>
+                </div>
+            </div>
+
+        </main>
+
+        <footer>
+            <!-- Link Back to selection Screen, locked at bottom of screen though -->
+            <a href="index.html">Selection Screen</a>
+        </footer>
+
+    </body>
+
+</html>

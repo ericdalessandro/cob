@@ -13,11 +13,12 @@
 }
 
 .light-pattern-body {
-    background-image: url(media/pentagram-black.png);
+    background-image: url(media/pentagram-white.png);
     background-repeat: no-repeat;
     background-position: fixed;
     background-position: 50% -60%;
-    background-color: darkred;
+    background-color: rgb(48, 0, 0);
+    color: white;
 }
 
 .light-pattern-body h1 {
@@ -75,7 +76,7 @@
 .game {
     width: 90%;
     height: 100%;
-    border: 2px solid black;
+    border: 2px solid white;
     background-image: url(media/touch-grass.jpg);
     text-align: center;
     color: white;
@@ -105,7 +106,7 @@
     margin: auto;
     margin-top: 100px;
     min-height: 250px;
-    border: 2px solid black;
+    border: 2px solid white;
     text-align: center;
     color: white;
     background-color: black;
@@ -144,7 +145,7 @@
     margin: auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    border: 2px solid black;
+    border: 2px solid white;
     text-align: center;
 }
 
@@ -154,7 +155,7 @@
     margin: auto;
     margin-top: 25px;
     margin-bottom: 25px;
-    border: 2px solid black;
+    border: 2px solid white;
     text-align: center;
 }
 
@@ -199,7 +200,7 @@
 
 #dark-theme-shop-item {
     display: none;   
-    background-color: rgb(48, 0, 0);
+    background-color: darkred;
 }
 
 #extra-grass-store-item {
@@ -217,25 +218,6 @@
 #copper-recharge {
     background-color: rgb(129, 98, 12);
 }
-
-#scrollBoxLight {
-    height: 150px;
-    width: 200px;
-    border: 2px solid rgb(0, 0, 0);
-    font-size: 90%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-
-  .hide-this {
-      color: rgb(36, 0, 0);
-      font-size: .5em;
-      text-align: center;
-  }
 
 footer {
     position: absolute;

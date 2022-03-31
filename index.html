@@ -1,153 +1,29 @@
 <!DOCTYPE html>
 
-<!-- Light Version of Cob's Seafood -->
+<!--
+    Selection Page for Dark or Light Version of Cob's Soulo Game.
+    Made by Eric D'Alessandro for CS480B HW3 Spring 2022.
+-->
 
 <html lang="en">
-
+    
     <head>
-        <title>Cob's Seafood Emporium</title>
+        <title>Cob's Soulo Game</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <script src="cart.js" async></script>
     </head>
 
-    <body>
-        <div class="wrapper">
-            <header>
-                <h1 id="page_title">Cob's Seafood Emporium</h1>
-            </header>
+    <body class="selection-page-body">
 
-            <nav>
-                <ul>
-                    <li><button class="show-products" type="button">Products</button></li>
-                    <li><button class="show-cart" type="button">Cart</button></li>
-                </ul>
-            </nav>
+        <main>
+            <div class="selection-page">
+                <h1>Cob's Soulo Game</h1>
+                <h3>Selection Page</h3>
+                <a href="light-pattern-page.html">Light Pattern Version</a>
+                ||
+                <a href="dark-pattern-page.html">Dark Pattern Version</a>
+            </div>
+        </main>
 
-            <main>
-                <div class="store">
-                    <div class="shop_row">
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Blobfish</h3>
-                            <img src="media/fish/fish1.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$28.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Sheepshead Fish</h3>
-                            <img src="media/fish/fish2.jpeg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$19.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Fish (not poisoned)</h3>
-                            <img src="media/fish/fish3.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$4.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Cerritulus Piscis</h3>
-                            <img src="media/fish/fish4.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$12.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-                    </div>
-    
-                    <div class="shop_row">
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Pufferfish</h3>
-                            <img src="media/fish/fish5.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$38.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Screaming Fish</h3>
-                            <img src="media/fish/fish6.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$14.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">Nose Fish</h3>
-                            <img src="media/fish/fish7.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$16.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-    
-                        <div class="shop_item">
-                            <h3 class="shop-item-title">I̶̝̋I̵̘̔I̷͉̿ ̶̰̇ċ̵̥e̴̝͌r̴̩̽v̴̯͋i̷͖̓s̷̺̊į̸̊a̵̚͜ ̵̖͝p̴̣͗o̵̤͆s̸̍ͅt̴̗͊e̸̠̓a̶̗͒</h3>
-                            <img src="media/fish/fish8.jpg" alt="delicious fish" class="fish"/>
-                            <h3 class="shop-item-price">$1.99</h3>
-                            <button class="add_to_cart" type="button">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart">
-                    <h1>Cart</h1>
-                    <div class="cart-row">
-                        <span class="cart-item cart-header cart-column">ITEM</span>
-                        <span class="cart-price cart-header cart-column">PRICE</span>
-                        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
-                    </div>
-                    <div class="cart-items">
-                        
-                    </div>
-                    <h3 class="cart-total-title">Total: </h3>
-                    <h4 class="cart-total-price"></h4>
-
-                    <form action="index.html">
-                        <div class="form-row" >
-
-                            <div class="form-col">
-                                <h3>Shipping Address</h3>
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="fullname" placeholder="John Doe" required>
-                                <label for="email">Email</label>
-                                <input type="text" id="email" name="email" placeholder="johndoe@email.com" required>
-                                <label for="address">Address</label>
-                                <input type="text" id="address" name="address" placeholder="123 Main St." required>
-                                <label for="city">City</label>
-                                <input type="text" id="city" name="city" placeholder="Cleveland" required>
-                                <label for="state">State</label>
-                                <input type="text" id="state" name="state" placeholder="OH" required>
-                                <label for="zip">Zip Code</label>
-                                <input type="text" id="zip" name="zip" placeholder="44101" required>
-                            </div>
-
-                            <div class="form-col">
-                                <h3>Credit Card</h3>
-                                <label for="cname">Name on Card</label>
-                                <input type="text" id="cname" name="cname" placeholder="John Doe" required>
-                                <label for="cnum">Card Number</label>
-                                <input type="text" id="cnum" name="cnum" placeholder="1111-1111-1111-1111" required>
-                                <label for="expmonth">Expiration Month</label>
-                                <input type="text" id="expmonth" name="expmonth" placeholder="January" required>
-                                <label for="expyear">Expiration Year</label>
-                                <input type="text" id="expyear" name="expyear" placeholder="2022" required>
-                                <label for="cvv">CVV</label required>
-                                <input type="text" id="cvv" name="cvv" placeholder="111" required>
-                            </div>
-
-                            <div class="submitSection">
-                                <input type="checkbox" id="readTerms" name="readTerms" value="yes" required/>
-                                <label for="readTerms">I agree to the terms & conditions of purchase. <a href="terms.html" target="_blank">Click here.</a></label><br/>
-                                <button id="submitButton" type="submit">Place Order</button>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-
-            </main>
-
-            <footer>
-                <a href="index-dark.html">The Dark Version</a>
-                <a href="index.html">The Light Version</a>
-            </footer>
-        </div>
     </body>
 
 </html>
