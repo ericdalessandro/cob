@@ -33,6 +33,7 @@ function ready() {
 
 /**
 * Hides all Elements on the Page excecpt for the one passed in.
+* @param except
 */
 function hideAllExcept(except){
     // hide all
@@ -61,6 +62,7 @@ function showPassword(){
 
 /**
  * Digitally touching grass does not make you less of a nerd. Touch some real grass.
+ * @param amount
  */
 function touchGrass(amount){
     // Update grass touches
@@ -70,13 +72,13 @@ function touchGrass(amount){
     var grassText = document.getElementById("grassTouchedText")
     var newText = "Grass Touched: " + grassTouches
     grassText.textContent = newText
-    //console.log("Grass Touched. New touches: " + grassTouches)
 }
 
 /**
  * Subtract or add to the coin counters.
  * @param coinType Gold, silver, or copper.
  * @param amount Amount integer, positive or negative.
+ * @param touchYN bool, should it adjust grass touches?
  */
 function adjustCoinCount(coinType, amount, touchYN){
     var coinIdString = coinType + "-coin-counter"
@@ -97,7 +99,6 @@ function adjustCoinCount(coinType, amount, touchYN){
 
     textId.textContent = newCount
 
-    console.log(currentCount + ", " + newCount)
 }
 
 /**
@@ -147,7 +148,6 @@ function adjustProgress(amount) {
     }
     dailyLoginCount++
     setProgress(newProgress)
-    console.log(currentProgress + "," + newProgress)
 }
 
 /**
@@ -203,7 +203,10 @@ function toggleDarkTheme() {
 }
 
 /**
- * Grass will buy 50,000 grass touches. Dark will set dark theme.
+ * Grass will buy 50,000 grass touches. 
+ * Dark will set dark theme.
+ * Gold, Silver, or Copper will buy respective coins.
+ * @param item What item is the user buying?
  */
 function buyStoreItem(item) {
     if (item == "grass") {
