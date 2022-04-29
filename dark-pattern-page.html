@@ -1,27 +1,234 @@
 <!DOCTYPE html>
 
+<!-- Dark Version of Cobify -->
+
 <html lang="en">
     
     <head>
-
+        <title>Cobify - Stream All Your Favorite Songs</title>
+        <link id="stylesheet-link" rel="stylesheet" type="text/css" href="style.css" />
+        <script src="script-dark.js" async></script>
     </head>
 
     <body>
 
         <header>
-
+            <div class="logo-section">
+                <img src='media/pentagram-white.png' alt='Cobify Logo' width='80px' height='80px'/>
+                <h1 class="title">Cobify</h1>
+            </div>
         </header>
 
-        <nav>
-
-        </nav>
-
         <main>
+            <div class="nav-menu">
+                <div class="nav-buttons">
+                    <button type="button" class="signup-button" onclick="showPage('signup')">Sign in / Create Account</button>
+                    <button type="button" class="collapsible">Genre</button>
+                        <div class="genres">
+                            <button type="button" class="list-genre-button" onclick="changeGenre('all')">All</button>
+                            <br/>
+                            <button type="button" class="list-genre-button" onclick="changeGenre('soul')">Soul Music</button>
+                            <br/>
+                            <button type="button" class="list-genre-button" onclick="changeGenre('normal')">Totally Normal Music</button>
+                        </div>
+                    <button type="button" class="collapsible">Favorites</button>
+                    <div class="genres">
+                        <button type="button" class="song-button" id='grapevine' onclick="playSong('media/songs/soul-music/i-heard-it-through-the-grapevine-marvin-gaye.mp3')">I Heard it Through the Grapevine - Marvin Gaye</button> <br/>
+                        <button type="button" class="song-button" id="africa" onclick="playSong('media/songs/totally-normal-songs/africa.mp3')">Africa - Toto</button> <br/>
+                        <button type="button" class="song-button" id="deano" onclick="playSong('media/songs/totally-normal-songs/aint-that-a-kick-in-the-head.mp3')">Ain't That a Kick in the Head - Dean Martin</button> <br/>
+                        <button type="button" class="song-button" id='delilah' onclick="playSong('media/songs/totally-normal-songs/hey-there-delilah.mp3')">Hey There Delilah - Plain White T's</button> <br/>
+                        <button type="button" class="song-button" id='september' onclick="playSong('media/songs/totally-normal-songs/september.mp3')">September - Earth, Wind, & Fire</button> <br/>
+                        <button type="button" class="song-button" id="alive" onclick="playSong('media/songs/totally-normal-songs/stayin-alive.mp3')">Stayin' Alive - Bee Gees</button> <br/>
+                        <button type="button" class="song-button" id='moana' onclick="playSong('media/songs/totally-normal-songs/youre-welcome-from-moana.mp3')">You're Welcome from Moana - Dwayne "The Rock" Johnson</button>
+                    </div>
+                    <button type="button" class="collapsible">Your Top Songs</button>
+                    <div class="genres">
+                        <ul>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                            <li class="song-list-item"></li>
+                        </ul>
+                    </div>
+                    <script>
+                        var coll = document.getElementsByClassName("collapsible");
+                        var i;
 
+                        for (i = 0; i < coll.length; i++) {
+                            coll[i].addEventListener("click", function() {
+                                this.classList.toggle("active");
+                                var content = this.nextElementSibling;
+                                if (content.style.display === "block") {
+                                    content.style.display = "none";
+                                } else {
+                                    content.style.display = "block";
+                                }
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="song-list">
+                    <div class="song-list-normal">
+                        <div class="song-row">
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/africa.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">Africa</h4>
+                                <h4 class="artist">Toto</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/africa.mp3')">Play</button>
+                                </div>
+                            </div>
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/deano.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">Ain't That a Kick in the Head</h4>
+                                <h4 class="artist">Dean Martin</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/aint-that-a-kick-in-the-head.mp3')">Play</button>
+                                </div>
+                            </div>
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/hey-there-delilah.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">Hey There Delilah</h4>
+                                <h4 class="artist">Plain White T's</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/hey-there-delilah.mp3')">Play</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="song-row">
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/september.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">September</h4>
+                                <h4 class="artist">Earth, Wind, & Fire</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/september.mp3')">Play</button>
+                                </div>
+                            </div>
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/stayin-alive.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">Stayin' Alive</h4>
+                                <h4 class="artist">Bee Gees</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/stayin-alive.mp3')">Play</button>
+                                </div>
+                            </div>
+                            <div class="song-block" style="background-image: url('media/songs/album-covers/dwayne.jpg'); background-size: 175px 175px;">
+                                <h4 class="song-title">You're Welcome from Moana</h4>
+                                <h4 class="artist">Dwarne "The Rock" Johnson</h4>
+                                <div class="play-botton-box">
+                                    <button type="button" class="play-botton-song" onclick="playSong('media/songs/totally-normal-songs/youre-welcome-from-moana.mp3')">Play</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="song-list-soul">
+                        <div class="song-block" id="soul-song" style="background-image: url('media/songs/album-covers/grapevine.png'); background-size: 175px 175px;">
+                            <h4 class="song-title">I Heard It Through The Grapevine</h4>
+                            <h4 class="artist">Marvin Gaye</h4>
+                            <div class="play-botton-box">
+                                <button type="button" class="play-botton-song" onclick="playSong('media/songs/soul-music/i-heard-it-through-the-grapevine-marvin-gaye.mp3')">Play</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="zombie-dole-kemp">
+                    <img src="media/ads/dark/zombie-dole-kemp-2024.png" alt="zombie Dole Kemp 2024 ad" onclick="window.open('http://www.dolekemp96.org/agenda/issues/internet.htm')"/>
+                </div>
+            </div>
+
+            <div class="signup-signin">
+                <form class="login-form">
+                    <label for="username">Username:</label><br/>
+                    <input type="text" id="username" name="username" required/><br/>
+                    <label for="password">Password:</label><br/>
+                    <input type="password" id="password" name="password" required/>
+                    <input type="checkbox" onclick="showPassword()">Show <br/>
+                    <input type="checkbox" required checked>I agree to the terms of service. <br/>
+                    <div class="submit">
+                        <input type="button" value="Sign up" onclick="showPage('cc')"/>
+                        <input type="button" value="Sign in" onclick="changeGenre('all');unlockContent()"/>
+                    </div>
+                </form>
+            </div>
+
+            <div class="add-cc">
+                <form>
+                    <div class="form-row" >
+
+                        <div class="form-col">
+                            <h3>Billing Address</h3>
+                            <label for="name">Full Name</label><br/>
+                            <input type="text" id="name" name="fullname" placeholder="John Doe" required><br/>
+                            <label for="email">Email</label><br/>
+                            <input type="text" id="email" name="email" placeholder="johndoe@email.com" required><br/>
+                            <label for="address">Address</label><br/>
+                            <input type="text" id="address" name="address" placeholder="123 Main St." required><br/>
+                            <label for="city">City</label><br/>
+                            <input type="text" id="city" name="city" placeholder="Cleveland" required><br/>
+                            <label for="state">State</label><br/>
+                            <input type="text" id="state" name="state" placeholder="OH" required><br/>
+                            <label for="zip">Zip Code</label><br/>
+                            <input type="text" id="zip" name="zip" placeholder="44101" required>
+                        </div>
+    
+                        <div class="form-col">
+                            <h3>Credit Card</h3>
+                            <label for="cname">Name on Card</label><br/>
+                            <input type="text" id="cname" name="cname" placeholder="John Doe" required><br/>
+                            <label for="cnum">Card Number</label><br/>
+                            <input type="text" id="cnum" name="cnum" placeholder="1111-1111-1111-1111" required><br/>
+                            <label for="expmonth">Expiration Month</label><br/>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="January" required><br/>
+                            <label for="expyear">Expiration Year</label><br/>
+                            <input type="text" id="expyear" name="expyear" placeholder="2022" required><br/>
+                            <label for="cvv">CVV</label required><br/>
+                            <input type="text" id="cvv" name="cvv" placeholder="111" required>
+                        </div>
+    
+                    </div>
+                        <div class="submitSection">
+                            <div class="checkbox-group">
+                                <label id="terms" for="readTerms">I agree to the terms & conditions.</label>
+                                <input type="checkbox" id="readTerms" name="readTerms" value="yes" required checked/>
+                            </div>
+                            <div class="checkbox-group">
+                                <label id="recurring" for="rec">Make a recurring donation.</label>
+                                <input class="checks" type="checkbox" id="rec" name="rec" value="yes" onchange="guiltTrip(this)" checked/>
+                            </div>
+                            <div class="checkbox-group">
+                                <label id="telemetry" for="telemetry">Send telemetry data.</label>
+                                <input class="checks" type="checkbox" id="telemetry" name="telemetry" value="yes" checked/>
+                            </div>
+                            <div class="checkbox-group">
+                                <label id="news" for="news">Sign up for our news letter.</label>
+                                <input class="checks" type="checkbox" id="news" name="news" value="yes" checked/>
+                                <span class="checks"></span>
+                            </div>
+                            <br/>
+                            <button id="submitButton" type="button" onclick="changeGenre('all');unlockContent()">Submit</button>
+                        </div>
+                </form>
+            </div>
+            <div class="ad-space">
+                <img src="media/ads/dark/cereal-flakes-dark.png" alt="cereal flakes ad" onclick="window.open('https://www.kelloggs.com/en_US/home.html/')"/>
+                <img src="media/ads/dark/jims-brake-pads-dark.png" alt="jim's brake pads ad" onclick="window.open('https://www.autozone.com/')"/>
+            </div>
         </main>
 
         <footer>
-            
+            <div class="media-player">
+                <div class="now-playing-div">
+                    <h3>Now Playing: </h3>
+                    <p class="current-song-p"></p>
+                </div>
+                <div class="media-buttons-container">
+                    <div class="media-buttons">
+                        <img class="playPauseButton" src='media/icons/play.png' alt='play button' onclick="togglePlayPause()"/>
+                        <img src="media/icons/heart-icon.png" alt='favorite song icon' onclick="favoriteCurrentSong()"/>
+                    </div>
+                </div>
+            </div>
         </footer>
 
     </body>

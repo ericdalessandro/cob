@@ -1,5 +1,5 @@
 /**
- * Light Version of the Javascript for HW4 Cob's Soul Music.
+ * Dark Version of the Javascript for HW4 Cob's Soul Music.
  * Eric D'Alessandro - CS480B Spring 2022.
  */
 
@@ -12,12 +12,13 @@
 /**
  * There's a lot of the HTML that I could retrofit to utilize this class but I made this after basically doing all of it and I'd rather focus on other things.
  */
-class song {
+ class song {
     constructor(title, artist, path, buttonId) {
         this.title = title
         this.artist = artist
         this.path = path
         this.buttonId = buttonId
+        this.timesListened = 0
     }
 }
 
@@ -28,13 +29,16 @@ if (document.readyState == 'loading') {
     ready()
 }
 
+var hasAccount
 var songPlaying
 var currentSong
 var songList
 var audio
+var topSongs
 
 function ready() {
     songPlaying = false
+    hasAccount = false
     songList = [
         new song('I Heard It Through the Grapevine', 'Marvin Gaye', 'media/songs/soul-music/i-heard-it-through-the-grapevine-marvin-gaye.mp3', 'grapevine'),
         new song('Africa', 'Toto', 'media/songs/totally-normal-songs/africa.mp3', 'africa'),
@@ -67,14 +71,27 @@ function togglePlayPause() {
  */
 function changeGenre(genre) {
     if (genre === "soul") {
+        document.getElementsByClassName('main-content')[0].style.display = 'block'
         document.getElementsByClassName('song-list-normal')[0].style.display = 'none'
         document.getElementsByClassName('song-list-soul')[0].style.display = 'block'
+        document.getElementsByClassName("add-cc")[0].style.display = 'none'
+        document.getElementsByClassName("signup-signin")[0].style.display = 'none'
     } else if (genre === "normal") {
+        document.getElementsByClassName('main-content')[0].style.display = 'block'
         document.getElementsByClassName('song-list-soul')[0].style.display = 'none'
         document.getElementsByClassName('song-list-normal')[0].style.display = 'block'
+        document.getElementsByClassName("add-cc")[0].style.display = 'none'
+        document.getElementsByClassName("signup-signin")[0].style.display = 'none'
+    } else if (genre === "none") {
+        document.getElementsByClassName('song-list-soul')[0].style.display = 'none'
+        document.getElementsByClassName('song-list-normal')[0].style.display = 'none'
+        document.getElementsByClassName('main-content')[0].style.display = 'none'
     } else {
+        document.getElementsByClassName('main-content')[0].style.display = 'block'
         document.getElementsByClassName('song-list-soul')[0].style.display = 'block'
         document.getElementsByClassName('song-list-normal')[0].style.display = 'block'
+        document.getElementsByClassName("add-cc")[0].style.display = 'none'
+        document.getElementsByClassName("signup-signin")[0].style.display = 'none'
     }
 }
 
@@ -83,17 +100,26 @@ function changeGenre(genre) {
  * @param {*} songpath 
  */
 function playSong(songpath) {
-    if (audio !== undefined) {
-        audio.pause()
+    if (!hasAccount) {
+        forceSignUp()
+    } else {
+        if (audio !== undefined) {
+            audio.pause()
+        }
+        audio = new Audio(songpath)
+        for (var i=0; i<songList.length; i++) {
+            if (songList[i].path === songpath) {
+                songList[i].timesListened++
+            }
+        }
+        audio.play()
+        if (currentSong == undefined) {
+            togglePlayPause()
+        }
+        currentSong = songpath
+        updateCurrentSongLabel()
+        updateSongRankings()
     }
-    console.log(songpath)
-    audio = new Audio(songpath)
-    audio.play()
-    if (currentSong == undefined) {
-        togglePlayPause()
-    }
-    currentSong = songpath
-    updateCurrentSongLabel()
 }
 
 /**
@@ -112,9 +138,33 @@ function updateCurrentSongLabel() {
 }
 
 /**
+ * Sort the topSongs array in decending order my most plays and update the 'Your Top Songs' panel.
+ */
+function updateSongRankings(){
+    topSongs = []
+    for (var i=0; i<songList.length; i++) {
+        if (songList[i].timesListened > 0) {
+            topSongs.push(songList[i])
+        }
+    }
+    if (topSongs !== undefined) {
+        topSongs.sort(function(a, b){return a.timesListened-b.timesListened}).reverse()
+    }
+
+    for (var i=0; i<topSongs.length; i++) {
+        document.getElementsByClassName('song-list-item')[i].textContent = i+1 + ".) " + topSongs[i].title + " - " + topSongs[i].artist + ". Plays: " + topSongs[i].timesListened
+        document.getElementsByClassName('song-list-item')[i].style.display = 'block'
+    }
+
+}
+
+/**
  * Adds the song currently playing to the "Favorites" tab.
  */
 function favoriteCurrentSong() {
+   if (!hasAccount) {
+       forceSignUp()
+   } else {
     var buttonId
     if (currentSong !== undefined) {
         for (var i=0; i<songList.length; i++) {
@@ -123,5 +173,64 @@ function favoriteCurrentSong() {
             }
         }
         document.getElementById(buttonId).style.display = "block"
+    }
+   }
+}
+
+/**
+ * Prompts user to create an account with an alert.
+ */
+function forceSignUp() {
+    if (hasAccount) {
+        return
+    } else {
+        alert("Please register an account to use this feature.")
+    }
+}
+
+/**
+ * Shows the passed in page.
+ * @param {*} type 
+ * @returns 
+ */
+function showPage(type) {
+    if(hasAccount) {
+        return
+    } else if (type === 'signup') {
+        changeGenre('none')
+        document.getElementsByClassName("add-cc")[0].style.display = 'none'
+        document.getElementsByClassName("signup-signin")[0].style.display = 'block'
+    } else if (type === 'cc') {
+        changeGenre('none')
+        document.getElementsByClassName('signup-signin')[0].style.display = 'none'
+        document.getElementsByClassName("add-cc")[0].style.display = 'block'
+    }
+}
+
+/**
+ * Toggles the show/hide password option.
+ */
+ function showPassword(){
+    var p = document.getElementById("password")
+    if(p.type === "password") {
+        p.type = "text"
+    } else {
+        p.type = "password"
+    }
+}
+
+/**
+ * Removes acccount restrictions.
+ */
+function unlockContent() {
+    hasAccount = true
+}
+
+/**
+ * Guilts the user to leave make donations checked.
+ */
+function guiltTrip(checkbox){
+    if (checkbox.checked == false) {
+        alert("Are you sure? Our starving devlopers are paid entirely based on donations...")
     }
 }
