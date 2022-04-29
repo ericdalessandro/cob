@@ -231,6 +231,6 @@ function unlockContent() {
  */
 function guiltTrip(checkbox){
     if (checkbox.checked == false) {
-        alert("Are you sure? Our starving devlopers are paid entirely based on donations...")
+        alert("Are you sure? Our starving developers are paid entirely based on donations...")
     }
 }
