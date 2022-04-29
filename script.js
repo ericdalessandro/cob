@@ -1,3 +1,21 @@
+/**
+ * NOTICE:
+ * I'm not entirely sure why but this page will not function properly in Vivaldi. It works fine in Edge so I don't think it's a Chromium issue so if none of the Javascript is working, please try another browser.
+ * It may end up working fine on GitHub pages but at least for running locally, Vivaldi no worky.
+ */
+
+/**
+ * There's a lot of the HTML that I could retrofit to utilize this class but I made this after basically doing all of it and I'd rather focus on other things.
+ */
+class song {
+    constructor(title, artist, path, buttonId) {
+        this.title = title
+        this.artist = artist
+        this.path = path
+        this.buttonId = buttonId
+    }
+}
+
 // Ensure body has loaded before script can run.
 if (document.readyState == 'loading') {
     document.addEventListener('DOMContentLoaded', ready)
@@ -5,230 +23,108 @@ if (document.readyState == 'loading') {
     ready()
 }
 
-var grassTouches
-var dailyLoginCount
-var dailyIncantation
+var songPlaying
+var currentSong
+var songList
+var audio
 
 function ready() {
-    // Inialize vars
-    grassTouches = 0
-    dailyLoginCount = 0
-    dailyIncantation = [
-        "Volo videre tenebras aeternas",
-        "Ego certe amo tenebras",
-        "Vere fan tenebrarum",
-        "Me et tenebrae sunt sicut amici optimi",
-        "Ita vere gratum essem si habere possem infinitas tenebras",
-        "Hoc vere sit multum",
-        "Gratias tibi valde"
+    songPlaying = false
+    songList = [
+        new song('I Heard It Through the Grapevine', 'Marvin Gaye', 'media/songs/soul-music/i-heard-it-through-the-grapevine-marvin-gaye.mp3', 'grapevine'),
+        new song('Africa', 'Toto', 'media/songs/totally-normal-songs/africa.mp3', 'africa'),
+        new song("Ain't that a Kick in the Head", 'Dean Martin', 'media/songs/totally-normal-songs/aint-that-a-kick-in-the-head.mp3', 'deano'),
+        new song('Hey There Delilah', "Plain White T's", 'media/songs/totally-normal-songs/hey-there-delilah.mp3', 'delilah'),
+        new song('September', 'Earth, Wind, & Fire', 'media/songs/totally-normal-songs/september.mp3', 'september'),
+        new song("Stayin' Alive", 'Bee Gees', 'media/songs/totally-normal-songs/stayin-alive.mp3', 'alive'),
+        new song("You're Welcome from Moana", 'Dwayne "The Rock" Johnson', 'media/songs/totally-normal-songs/youre-welcome-from-moana.mp3', 'moana')
     ]
-    // Reset progress bar
-    setProgress(1)
-    updateIncantation()
-
-    // Hide all elements on load except login.
-    hideAllExcept('login')
-
 }
 
 /**
-* Hides all Elements on the Page excecpt for the one passed in.
-* @param except
-*/
-function hideAllExcept(except){
-    // hide all
-    document.getElementsByClassName('login')[0].style.display = 'none'
-    document.getElementsByClassName('landing-page')[0].style.display = 'none'
-    document.getElementsByClassName('daily-login-bonus')[0].style.display = 'none'
-    document.getElementsByClassName('store')[0].style.display = 'none'
-    document.getElementsByClassName('recharge')[0].style.display = 'none'
-
-    // show exception
-    document.getElementsByClassName(except)[0].style.display = 'block'
-
-}
-
-/**
- * Toggles the show/hide password option.
+ * Toggle pause / play of the current song and change the icon in the media player.
  */
-function showPassword(){
-    var p = document.getElementById("password")
-    if(p.type === "password") {
-        p.type = "text"
+function togglePlayPause() {
+    if (songPlaying){
+        document.getElementsByClassName('playPauseButton')[0].src = 'media/icons/play.png'
+        audio.pause()
+    }else{
+        document.getElementsByClassName('playPauseButton')[0].src = 'media/icons/pause.png'
+        audio.play()
+    }
+
+    songPlaying = !songPlaying
+}
+
+/**
+ * Moves to the song in the array {amount} away from the current song.
+ * @param {*} amount 
+ */
+function skipSong(amount) {
+    currentSong = songList[songList.findIndex(currentSong+amount)]
+}
+
+/**
+ * Changes what genre of songs is displayed in the main content area based on the genre passed in.
+ * @param {*} genre 
+ */
+function changeGenre(genre) {
+    if (genre === "soul") {
+        document.getElementsByClassName('song-list-normal')[0].style.display = 'none'
+        document.getElementsByClassName('song-list-soul')[0].style.display = 'block'
+    } else if (genre === "normal") {
+        document.getElementsByClassName('song-list-soul')[0].style.display = 'none'
+        document.getElementsByClassName('song-list-normal')[0].style.display = 'block'
     } else {
-        p.type = "password"
+        document.getElementsByClassName('song-list-soul')[0].style.display = 'block'
+        document.getElementsByClassName('song-list-normal')[0].style.display = 'block'
     }
 }
 
 /**
- * Digitally touching grass does not make you less of a nerd. Touch some real grass.
- * @param amount
+ * Play the desired song. The absolute/relative path or url must be passed in.
+ * @param {*} songpath 
  */
-function touchGrass(amount){
-    // Update grass touches
-    grassTouches+=amount
-    
-    // Update UI
-    var grassText = document.getElementById("grassTouchedText")
-    var newText = "Grass Touched: " + grassTouches
-    grassText.textContent = newText
+function playSong(songpath) {
+    if (audio !== undefined) {
+        audio.pause()
+    }
+    console.log(songpath)
+    audio = new Audio(songpath)
+    audio.play()
+    if (currentSong == undefined) {
+        togglePlayPause()
+    }
+    currentSong = songpath
+    updateCurrentSongLabel()
 }
 
 /**
- * Subtract or add to the coin counters.
- * @param coinType Gold, silver, or copper.
- * @param amount Amount integer, positive or negative.
- * @param touchYN bool, should it adjust grass touches?
+ * Updates the "Now Playing:" label in the media player.
  */
-function adjustCoinCount(coinType, amount, touchYN){
-    var coinIdString = coinType + "-coin-counter"
-    var textId = document.getElementById(coinIdString)
-    var currentCount = parseInt(textId.textContent)
-    var newCount
-    if (amount < 0) {
-        if (currentCount <= 0) {
-            newCount = 0
-        } else {
-            newCount = currentCount + amount
-            coinGrassTouch(coinType, touchYN)
+function updateCurrentSongLabel() {
+    var newSong
+    if (currentSong !== undefined) {
+        for (var i=0; i<songList.length; i++) {
+            if (songList[i].path === currentSong) {
+                newSong = songList[i].title + " - " + songList[i].artist
+            }
         }
-    } else {
-        newCount = currentCount + amount
-        coinGrassTouch(coinType, touchYN)
+        document.getElementsByClassName('current-song-p')[0].textContent = newSong
     }
-
-    textId.textContent = newCount
-
 }
 
 /**
- * Adjust the grass touched amount through redeaming coins.
- * @param coinType string value.
- * @param touchYN boolean value.
+ * Adds the song currently playing to the "Favorites" tab.
  */
-function coinGrassTouch(coinType, touchYN){
-    if(touchYN) {
-        if (coinType == "gold") {
-            touchGrass(1000)
-        } else if (coinType == "silver") {
-            touchGrass(100)
-        } else {
-            touchGrass(10)
+function favoriteCurrentSong() {
+    var buttonId
+    if (currentSong !== undefined) {
+        for (var i=0; i<songList.length; i++) {
+            if (songList[i].path === currentSong) {
+                buttonId = songList[i].buttonId
+            }
         }
-    }
-}
-
-/**
- * Set the percentage on the progress bar.
- * @param amount 
- */
-function setProgress(amount) {
-    if (amount <= 100 && amount >= 1) {
-        document.getElementById("progress-fill").style.width = amount + "%"
-    } else {
-        console.log("setProgress: Bad amount value. Add a value between 1 and 100.")
-        document.getElementById("progress-fill").style.width = 1
-    }
-}
-
-/**
- * Change the progress by a set amount. + or -.
- * @param amount 
- */
-function adjustProgress(amount) {
-    var currentProgress = document.getElementById("progress-fill").style.width.substring(0, document.getElementById("progress-fill").style.width.length-1)
-    currentProgress = parseInt(currentProgress)
-    var newProgress
-    if (currentProgress+amount <= 100) {
-        newProgress = currentProgress + amount
-    } else {
-        newProgress = 100
-        document.getElementById("dark-theme-shop-item").style.display = 'block'
-        document.getElementById("dlb-title").textContent = "Get Dark Theme in the Store!"
-    }
-    dailyLoginCount++
-    setProgress(newProgress)
-}
-
-/**
- * Actions for when Daily Login Bonus is accepted.
- * @param skipMidnightCheck Skip the midnight time check.
- * @param darkPattern boolean, is this the dark pattern version?
- */
-function dailyBonus(skipMidnightCheck, darkPattern){
-    var now = new Date()
-    // Check if within hours of midnight or skip enabled.
-    if(((now.getHours() >= 23 || now.getHours() <= 1 || skipMidnightCheck) && document.getElementById("read-checkbox").checked) && !darkPattern) {
-        adjustProgress(15)
-        hideAllExcept("landing-page")
-        document.getElementById("read-checkbox").checked = false
-        document.getElementById("incantation-error-msg").style.display = 'none'
-        updateIncantation()
-    } else if (((now.getHours() >= 23 || now.getHours() <= 1 || skipMidnightCheck) && document.getElementById("read-checkbox").checked) && darkPattern) {
-        adjustProgress(15)
-        hideAllExcept("landing-page")
-        document.getElementById("incantation-error-msg").style.display = 'none'
-        updateIncantation()
-    } else {
-        document.getElementById("incantation-error-msg").textContent = "You can only collect this within 1 hour of midnight and you must receit the incantation."
-        document.getElementById("incantation-error-msg").style.display = 'block'
-    }
-}
-
-/**
- * Update Incantation Text on Daily Login Bonus Page.
- */
-function updateIncantation(){
-    var inc
-    if (dailyLoginCount >= 6){
-        inc = dailyIncantation[6]
-    } else {
-        inc = dailyIncantation[dailyLoginCount]
-    }
-    document.getElementById("incantation-text").textContent = inc
-}
-
-/**
- * Changes the stylesheet href.
- */
-function toggleDarkTheme() {
-    var currentTheme = document.getElementById("stylesheet-link").getAttribute("href")
-    var newTheme
-    if (currentTheme == "style.css") {
-        newTheme = "style-dark.css"
-    } else {
-        newTheme = "style.css"
-    }
-    document.getElementById("stylesheet-link").setAttribute("href", newTheme)
-}
-
-/**
- * Grass will buy 50,000 grass touches. 
- * Dark will set dark theme.
- * Gold, Silver, or Copper will buy respective coins.
- * @param item What item is the user buying?
- */
-function buyStoreItem(item) {
-    if (item == "grass") {
-        if (parseInt(document.getElementById("gold-coin-counter").textContent) >= 10) {
-            adjustCoinCount("gold", -10, false)
-            touchGrass(50000)
-            alert("Success! 50,000 grass touches have been added to your game!")
-        } else {
-            alert("Not enough gold.")
-        }
-    } else if (item == "dark") {
-        toggleDarkTheme()
-    } else if (item == "gold" || item == "silver" || item == "copper") {
-        if (document.getElementById("isDarkPattern").textContent == "N") {
-            // If not dark pattern, confirm payment.
-            if (confirm('Are you sure? Your card will be charged.')) {
-                adjustCoinCount(item, 10, false)
-            } 
-        } else {
-            // else alert for payment.
-            alert("Success. 10 " + item + " have been added to your account.")
-            adjustCoinCount(item, 10, false)
-        }
+        document.getElementById(buttonId).style.display = "block"
     }
 }

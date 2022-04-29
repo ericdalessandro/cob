@@ -10,3 +10,4 @@ Previous assignments are archived in their respective folders.
 - hw1-cobs-landing-page
 - hw2-cobs-seafood
 - hw3-cobs-soulo-game
+- hw4-cobs-soul-music
