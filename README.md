@@ -11,3 +11,7 @@ Previous assignments are archived in their respective folders.
 - hw2-cobs-seafood
 - hw3-cobs-soulo-game
 - hw4-cobs-soul-music
+
+### Notes / Bugs:
+- HW4 contains fake ads that will be blocked if you have an ad blocker.
+- HW4 Javascript has issues working on Vivaldi when locally opening the html file. Works fine on GitHub Pages however.

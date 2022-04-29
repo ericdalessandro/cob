@@ -130,8 +130,11 @@
 .selection-page {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    color: black;
+    color: white;
     margin-top: 4em;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .song-block {
